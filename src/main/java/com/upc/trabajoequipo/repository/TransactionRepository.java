@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface TransactionRepository  extends JpaRepository<Transaction, Long>    {
     boolean existsByNumberAccountAndAccountAndAccountTransaction(String numberAccount, Account account, boolean accountTransaction);
-    List<Transaction> findByNumberAccount(String numberAccount);
+    List<Transaction> findByNameCustomer(String nameCustomer);
 }

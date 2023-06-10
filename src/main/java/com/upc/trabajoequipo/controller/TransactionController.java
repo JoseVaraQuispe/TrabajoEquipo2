@@ -26,10 +26,10 @@ public class TransactionController {
 
     //EndPoint hhtp://localhost:5432/api/bank/v1/transactions/filterByNameCustomer
     //Method: GET
-    @Transactional
+    @Transactional(readOnly = true)
     @RequestMapping("/transactions/filterByNameCustomer")
-    public ResponseEntity<List<Transaction>> getTransactionsByNumberAccount(@RequestParam String numberAccount) {
-        List<Transaction> transactions = TransactionRepository.findByNumberAccount(numberAccount);
+    public ResponseEntity<List<Transaction>> getTransactionsByNameCustomer(@RequestParam String nameCustomer) {
+        List<Transaction> transactions = transactionRepository.findByNameCustomer(nameCustomer);
         return ResponseEntity.ok(transactions);
     }
 
@@ -44,7 +44,7 @@ public class TransactionController {
         validateTransaction(transaction);
         transaction.setCreateDate(LocalDate.now());
         transaction.setAccount(account);
-        return new ResponseEntity<Transaction>(TransactionRepository.save(transaction), HttpStatus.CREATED);
+        return new ResponseEntity<Transaction>(transactionRepository.save(transaction), HttpStatus.CREATED);
     }
 
     private void validateTransaction(Transaction transaction) {
