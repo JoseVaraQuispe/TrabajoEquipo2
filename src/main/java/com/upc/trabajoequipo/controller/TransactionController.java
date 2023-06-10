@@ -41,9 +41,9 @@ public class TransactionController {
                                                          @RequestBody Transaction transaction) {
         Account account = accountRepository.findById(accountId)
                 .orElseThrow(() -> new ResourceNotFoundException("No se encuentra la cuenta con el id: " + accountId));
-        existsByNumberAccountAndAccountAndAccountTransaction(transaction, account);
         validateTransaction(transaction);
-
+        transaction.setCreateDate(LocalDate.now());
+        transaction.setAccount(account);
         return new ResponseEntity<Transaction>(TransactionRepository.save(transaction), HttpStatus.CREATED);
     }
 
