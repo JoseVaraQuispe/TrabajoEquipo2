@@ -16,8 +16,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/bank/v1")
 public class TransactionController {
-    private AccountRepository accountRepository;
-    private TransactionRepository transactionRepository;
+    private final AccountRepository accountRepository;
+    private final TransactionRepository transactionRepository;
 
     public TransactionController(AccountRepository accountRepository, TransactionRepository transactionRepository) {
         this.accountRepository = accountRepository;
